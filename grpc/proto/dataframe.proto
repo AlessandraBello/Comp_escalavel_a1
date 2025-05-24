@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+// package dataframe;
+
+message Summary {
+  float mean = 1;
+  float min = 2;
+  float max = 3;
+  float q1 = 4;
+  float median = 5;
+  float q3 = 6;
+}
+message Transaction {
+  int32 idSender = 1;
+  int32 idReceiver = 2;
+  float amount = 3;
+  string location = 4;
+}
+message Abnormal {
+  repeated int32 vectorAbnormal = 1;
+}
+
+message GenericInput{}
+message GenericResponse{}
+
+service ProcessingServices{
+  rpc addTransaction(Transaction) returns (GenericResponse);
+  rpc transactionsInfo(GenericInput) returns (Summary);
+  rpc abnormalTransactions(GenericInput) returns (Abnormal);
+}
